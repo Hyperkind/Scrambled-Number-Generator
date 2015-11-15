@@ -4,7 +4,6 @@ var should = chai.should();
 var expect = chai.expect;
 
 var generator = require('../js/generator.js');
-var newArray = require('../js/generator.js');
 
 describe('Generator', function () {
   it('should be a function', function () {
@@ -15,7 +14,7 @@ describe('Generator', function () {
   it('should only accept a number', function () {
     expect(generator()).to.deep.equal([], 'should have a parameter');
     expect(generator(3)).to.not.deep.equal([], 'parameter should be a number');
-    // expect(generator()).to.be.a('number');
+    // expect(generator(10)).to.equal('number');
   });
 
   describe('the result', function() {   
@@ -28,11 +27,18 @@ describe('Generator', function () {
       expect(generator(5).length).to.equal(5);
     });
 
-    it('the numbers should not exceed the length value');
+    it('the numbers should not exceed the length value', function () {
+      expect(generator(10)).to.not.be.above(10);
+    });
 
     it('should be in a random order');
     
-    it('should be unique');
+    it('the array values should be unique', function () {
+      var arr = generator(10);
+      for(var i = 0; i < arr.length; i++) {
+        expect(i).to.equal(arr.indexOf(arr[i]));
+      }
+    });
     
     
   
